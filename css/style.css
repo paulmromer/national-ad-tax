@@ -1,0 +1,52 @@
+@font-face {
+    font-family: 'StixTwoMathRegular';
+    src: url('../fonts/stixtwomath-regular.woff2') format('woff2'),
+         url('../fonts/stixtwomath-regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'StixTwoTextRegular';
+    src: url('../fonts/stixtwotext-regular.woff2') format('woff2'),
+         url('../fonts/stixtwotext-regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'StixTwoTextRegular', serif;
+    width: 50%;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+p {
+    text-align: justify;
+}
+
+.mt-5 {
+    margin-top: 5rem;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-center {
+    text-align: center;
+}
+
+img {
+    padding-top: 2rem;
+    width:80%;
+}
+.btn {
+    background-color: #fff;
+    border: 2px solid black;
+    font-size: 1.1rem;
+    line-height: 35px;
+    margin-top: 2rem;
+    cursor: pointer;
+}
