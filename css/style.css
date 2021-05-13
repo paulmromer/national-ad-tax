@@ -16,7 +16,7 @@
 
 body {
     font-family: 'StixTwoTextRegular', serif;
-    width: 50%;
+    width: 60%;
     left: 0;
     right: 0;
     margin: auto;
@@ -26,6 +26,9 @@ p {
     text-align: justify;
 }
 
+.mt-2 {
+    margin-top: 2rem;
+}
 .mt-5 {
     margin-top: 5rem;
 }
@@ -49,4 +52,13 @@ img {
     line-height: 35px;
     margin-top: 2rem;
     cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.CodeMirror {
+    border-top: 1px solid;
+    border-bottom: 1px solid;
 }
