@@ -11,6 +11,7 @@
     <link async defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.58.2/lib/codemirror.css">
     <script src="https://cdn.jsdelivr.net/npm/codemirror@5.58.2/lib/codemirror.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/codemirror@5.58.2/mode/python/python.js"></script>
+
     <script src="https://cdn.jsdelivr.net/pyodide/v0.17.0/full/pyodide.js"></script>
 </head>
 
@@ -52,7 +53,7 @@
         <form>
             <textarea id="code" name="code" rows=100></textarea>
         </form>
-        <button class='btn' id='run'>run</button>
+        <button class='btn hidden' id='run'>run</button>
     </div>
     
     <div id="results" class ="hidden mt-2">
@@ -95,6 +96,7 @@
 
     <script src="./js/editor.js"></script>
     <script src="./js/load-tables.js"></script>
+    <script src="./js/pyodide.js"></script>
 
 </body>
 
