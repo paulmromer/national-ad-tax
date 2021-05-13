@@ -62,3 +62,7 @@ img {
     border-top: 1px solid;
     border-bottom: 1px solid;
 }
+
+footer {
+    height: 200px;
+}

@@ -1,18 +1,35 @@
 async function loadPyodideAndPackages(){
     await loadPyodide({ indexURL : 'https://cdn.jsdelivr.net/pyodide/v0.17.0/full/' });
     await self.pyodide.loadPackage('matplotlib');
-    console.log("loadPackage is done");
-    // await self.pyodide.runPython("import matplotlib")
     await self.pyodide.runPython("import matplotlib.pyplot as plt")
-    console.log("pyplot from main");
     await self.pyodide.runPython("from matplotlib import ticker");
-    console.log("ticker from main");
     await self.pyodide.runPython("import numpy as np");
-    console.log("numpy from main");
     await self.pyodide.runPython("import io, base64");
-    console.log("io, base from main");
     document.getElementById("run").classList.remove("hidden");
+    let code = await readCode("./python/ad-tax.py");
+    let html_table = await readCode("./python/html-table.py")
+    pyodide.runPython(html_table);
+    console.time('runcode');
+    pyodide.runPython(code);
+    console.timeEnd('runcode');
 }
 
 loadPyodideAndPackages()
 
+async function readCode(file) {
+    return  (await (await fetch(file)).text());
+}
+
+function executeCode() {
+    input = editor.getDoc().getValue();
+    pyodide.runPython(input);
+    pyodide.runPython("table_marg = table_marg_rates(b, r)");
+    pyodide.runPython("table_total = table_tax_paid_total(b, r)");
+    document.getElementById("results").classList.remove("hidden")
+    document.getElementById("marginal-rate-table-calculated").innerHTML=pyodide.globals.get("table_marg");
+    document.getElementById("total-revenue-table-calculated").innerHTML=pyodide.globals.get("table_total");
+}
+
+document.getElementById('run').addEventListener('click', function () {
+    executeCode();
+});
