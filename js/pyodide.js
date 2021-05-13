@@ -28,6 +28,8 @@ function executeCode() {
     document.getElementById("results").classList.remove("hidden")
     document.getElementById("marginal-rate-table-calculated").innerHTML=pyodide.globals.get("table_marg");
     document.getElementById("total-revenue-table-calculated").innerHTML=pyodide.globals.get("table_total");
+    pyodide.runPython("calculated_graph = us_fig(b,r)");
+    document.getElementById("avg-tax-rate-calculated").src=pyodide.globals.get("calculated_graph");
 }
 
 document.getElementById('run').addEventListener('click', function () {

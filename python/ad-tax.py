@@ -192,7 +192,8 @@ def us_fig(b: list, r: list):
 
     with plt.style.context(base_style):
         fig = plt.figure()
-        ax = fig.add_axes([0.35, 0.2, 0.65, 0.6])
+        ax = fig.add_axes([0.1, 0.15, 0.8, 0.75])
+        # ax = fig.add_axes([0.35, 0.2, 0.65, 0.6])
         ax = floating_spines(ax)
         ax.set_xlim(-1, 60)
         ax.set_ylim(-0.01, 0.4)
@@ -224,3 +225,7 @@ def us_fig(b: list, r: list):
     img_str = 'data:image/png;base64,' + base64.b64encode(buf.read()).decode('UTF-8')
         
     return img_str
+
+    def split(s, b, r, revenue = 50):
+        tax_bill = s * (ar(rv/s, b, r)* rv/s)
+        return f"Total tax bill: ${tax_bill: 4.1f} billion"
