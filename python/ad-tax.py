@@ -226,6 +226,6 @@ def us_fig(b: list, r: list):
         
     return img_str
 
-    def split(s, b, r, revenue = 50):
-        tax_bill = s * (ar(rv/s, b, r)* rv/s)
-        return f"Total tax bill: ${tax_bill: 4.1f} billion"
+def split(s, b, r, revenue = 50):
+    tax_bill = s * (ar(revenue/s, b, r)* revenue/s)
+    return f"${tax_bill: <2.1f} billion"

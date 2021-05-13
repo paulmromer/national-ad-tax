@@ -30,6 +30,13 @@ function executeCode() {
     document.getElementById("total-revenue-table-calculated").innerHTML=pyodide.globals.get("table_total");
     pyodide.runPython("calculated_graph = us_fig(b,r)");
     document.getElementById("avg-tax-rate-calculated").src=pyodide.globals.get("calculated_graph");
+    pyodide.runPython("split_1 = split(1,b,r)");
+    pyodide.runPython("split_2 = split(2,b,r)");
+    pyodide.runPython("split_4 = split(4,b,r)");
+    console.log(pyodide.globals.get("split_1"))
+    document.getElementById("split-1").innerHTML=pyodide.globals.get("split_1");
+    document.getElementById("split-2").innerHTML=pyodide.globals.get("split_2");
+    document.getElementById("split-4").innerHTML=pyodide.globals.get("split_4");
 }
 
 document.getElementById('run').addEventListener('click', function () {

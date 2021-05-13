@@ -26,6 +26,10 @@ p {
     text-align: justify;
 }
 
+pre {
+    margin: 5px !important;
+}
+
 .mt-2 {
     margin-top: 2rem;
 }
@@ -61,6 +65,11 @@ img {
 .CodeMirror {
     border-top: 1px solid;
     border-bottom: 1px solid;
+}
+
+.inline-variable {
+    font-style: italic;
+    color:#33986f; 
 }
 
 footer {
