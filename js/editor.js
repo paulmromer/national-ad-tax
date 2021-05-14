@@ -20,14 +20,14 @@ r = [0, 0.05, 0.125, 0.20, 0.275, 0.35, 0.425, 0.50, 0.575, 0.65, 0.725]
 # 
 # Alternative 1: Set marginal rate to 40% for revenue above $30 billion:
 # 
-# b = [0,    5,    10,   15,    20,   25,   30]
-# r = [0, 0.05, 0.125, 0.20, 0.275, 0.35, 0.40]
+#b = [0,    5,    10,   15,    20,   25,   30]
+#r = [0, 0.05, 0.125, 0.20, 0.275, 0.35, 0.40]
 # 
-# Alternative 2: Specify a value for f; multiply all the rates by that factor: 
+# Alternative 2: Multiply all rates by a factor f: 
 # 
-# f = 0.80
-# b = [0,    5,    10,   15,    20,   25,    30,   35,    40,   50,    60]
-# r = [0, 0.05, 0.125, 0.20, 0.275, 0.35, 0.425, 0.50, 0.575, 0.65, 0.725]
-# r = [ rate * f for rate in r]` 
+#f = 1.2
+#b = [0,    5,    10,   15,    20,   25,    30,   35,    40,   50,    60]
+#r = [0, 0.05, 0.125, 0.20, 0.275, 0.35, 0.425, 0.50, 0.575, 0.65, 0.725]
+#r = [ rate * f for rate in r]` 
 
 editor.getDoc().setValue(python_snippet); 

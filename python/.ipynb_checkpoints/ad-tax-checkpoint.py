@@ -123,8 +123,8 @@ base_style = {
     'figure.titlesize':               8,
     'axes.titlesize':                 8,  # the default font sizes have to be smaller bc of the higher dpi
     'axes.labelsize':                 6,
-    'ytick.labelsize':                4,
-    'xtick.labelsize':                4,
+    'ytick.labelsize':                5,
+    'xtick.labelsize':                5,
     'legend.fontsize':                5,
     'lines.linewidth':                1,
     'lines.markersize':               3,
@@ -182,22 +182,21 @@ def us_fig(b: list, r: list):
     ar_for_line = [ar(x, b, r) for x in rev_for_line]
     
     adjustments = [
-        (+0.5, -1.5, "", 0),
-        (+0.5, -1.5, "", 1),
-        (+0.5, -1.5, "", 2),
-        (+1.0, -0.4, "", 3),
-        (+2.0, -0.8, "All others", 4)
-    ]
-
+            (+0.5, -1.5, "", 0),
+            (+0.5, -1.5, "", 1),
+            (+0.5, -1.5, "", 2),
+            (+1.0, -1.0, "", 3),
+            (+2.0, -1.5, "All others", 4)
+        ]
+    
     with plt.style.context(base_style):
         fig = plt.figure()
         ax = fig.add_axes([0.1, 0.15, 0.8, 0.75])
-        # ax = fig.add_axes([0.35, 0.2, 0.65, 0.6])
         ax = floating_spines(ax)
         ax.set_xlim(-1, 60)
-        ax.set_ylim(-0.01, 0.4)
+        ax.set_ylim(-0.01, 0.5)
         ax.yaxis.set_major_formatter(ticker.PercentFormatter(xmax = 1.0, decimals = 0))
-        ax.spines['left'].set_bounds(low = 0, high = 0.4)
+        ax.spines['left'].set_bounds(low = 0, high = 0.5)
         ax.spines['bottom'].set_bounds(low = 0, high = 60)
         ax.plot(rev_for_line, ar_for_line)
         ax.plot(us_rev_2021, us_avg_r, ls = '', marker = 'o', ms = 1.5)
@@ -206,13 +205,13 @@ def us_fig(b: list, r: list):
                 ax.text(
                     us_rev_2021[j] + adjustments[j][0], 
                     us_avg_r[j] + adjustments[j][1]/100, 
-                    adjustments[j][2], fontsize = 4
+                    adjustments[j][2], fontsize = 6
                 ) 
             else:  
                 ax.text(
                     us_rev_2021[j] + adjustments[j][0], 
                     us_avg_r[j] + adjustments[j][1]/100, 
-                    us_names[j] + adjustments[j][2], fontsize = 4
+                    us_names[j] + adjustments[j][2], fontsize = 6
                 ) 
 
         ax.set_title("Average Tax Rate as a Function of Total Revenue", pad = 10)
@@ -222,9 +221,76 @@ def us_fig(b: list, r: list):
     fig.savefig(buf, format='png')
     buf.seek(0)
     img_str = 'data:image/png;base64,' + base64.b64encode(buf.read()).decode('UTF-8')
-        
+    # Uncomment the line below to generate the default png files 
+    # fig.savefig("../graphs/fig-us-default.png")    
     return img_str
 
 def split(s, b, r, revenue = 50):
     tax_bill = s * (ar(revenue/s, b, r)* revenue/s)
     return f"${tax_bill: <2.1f} billion"
+
+
+def ww_fig(b,r):
+    """
+    """
+    ww_rev_for_graph = range(150)
+    ww_ar_for_graph = [ar(x, b, r) for x in ww_rev_for_graph]
+
+    ww_rev = {
+        "Amazon": 26309972874.28,
+        "Facebook": 107723102210.00,
+        "Google": 130145195979.30,
+        "IAC": 734739747.00,
+        "Microsoft": 8960366731.10,
+        "Reddit": 261098903.52,
+        "Snapchat": 3206780000.00,
+        "Spotify": 1100807642.44,
+        "Twitter": 4028869581.75,
+        "Verizon Media": 4589668440.03,
+        "Yelp": 929364566.42,
+    }
+
+    ww_rev_l = list(ww_rev.items())
+    ww_rev_s = sorted(ww_rev_l, key=lambda company: company[1], reverse = True)
+    ww_names = [ company[0] for company in ww_rev_s ]
+    ww_rev_2021 = [ company[1]/10**9 for company in ww_rev_s ]
+    ww_avg_r = [ ar(x, b, r) for x in ww_rev_2021]
+        
+    adjustments = [
+        (+1, -2.5, "", 0),
+        (+1, -2.5, "", 1),
+        (+1, -2.5, "", 2),
+       (+2.0, -2, "All others", 3)
+    ]
+    with plt.style.context(base_style):
+        fig = plt.figure()
+        ax = fig.add_axes([0.1, 0.15, 0.8, 0.75])
+        ax = floating_spines(ax)
+        ax.set_xlim(-1, 150)
+        ax.set_ylim(-0.01,0.5)
+        ax.yaxis.set_major_formatter(ticker.PercentFormatter(xmax = 1.0, decimals = 0))
+        ax.spines['bottom'].set_bounds(low = 0, high = 150)
+        ax.spines['left'].set_bounds(low = 0, high = 0.5)
+        ax.plot(ww_rev_for_graph, ww_ar_for_graph)
+        ax.plot(ww_rev_2021, ww_avg_r, ls = '', marker = 'o', ms = 1.5)
+        for j in range(len(adjustments)):
+            if adjustments[j][2] == "All others":
+                ax.text(ww_rev_2021[j] + adjustments[j][0], ww_avg_r[j] + adjustments[j][1]/100, adjustments[j][2], fontsize = 6) 
+            else:  
+                ax.text(
+                    ww_rev_2021[j] + adjustments[j][0],
+                    ww_avg_r[j] + adjustments[j][1]/100, 
+                    ww_names[j] + adjustments[j][2], 
+                    fontsize = 6
+                ) 
+
+        ax.set_title("Average Tax Rate as a Function of Total Revenue", pad = 10)
+        ax.axes.xaxis.set_label_text("Worldwide Revenue 2021, Billion USD per Year")
+            
+    buf = io.BytesIO()
+    fig.savefig(buf, format='png')
+    buf.seek(0)
+    img_str = 'data:image/png;base64,' + base64.b64encode(buf.read()).decode('UTF-8')
+    # Uncomment the line below to generate the default png files 
+    # fig.savefig("../graphs/fig-ww-default.png")
+    return 
