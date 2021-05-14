@@ -9,7 +9,7 @@ def h_table(
     dark_header: bool = False,
     header_color: str = "#ffffff",
     font_size:int = 16,
-    row_margin: str = "2px",
+    row_margin: str = "5px",
     header_border_bottom: bool = True,
     body_border_bottom: bool = True,
     table_title: str = "",
@@ -174,9 +174,9 @@ def h_table(
         h += '    <tr style="{0}">\n'.format("")
         h += '      <th style="{0}">\n'.format(header_bkgd)
         if len(table_title) > 0:
-            h += "        <pre style='margin: " + row_margin + "; {0}'>{1}</pre>\n".format(title_f(), table_title)
+            h += "        <pre style='margin: " + row_margin + ", {0}'>{1}</pre>\n".format(title_f(), table_title)
         for j in range(0,header_rows):
-            h += "        <pre style='margin: " + row_margin + "; {0}'>{1}</pre>\n".format(pre_style, next(row_gen))
+            h += "        <pre style='margin: " + row_margin + ", {0}'>{1}</pre>\n".format(pre_style, next(row_gen))
         h += "      </th>\n"
         h += "    </tr>\n"
         h += "  </thead>\n"
@@ -203,7 +203,7 @@ def h_table(
 
         h = "    <tr>\n"
         h += '      <td style="{0}">\n'.format(bkgd)
-        h += "        <pre style='margin: " + row_margin + "; {0}'>{1}</pre>\n".format(pre_style, b_row)
+        h += "        <pre style='margin: " + row_margin + ", {0}'>{1}</pre>\n".format(pre_style, b_row)
         h += "      </td>\n"
         h += "    </tr>\n"
         return h, row_num + 1
@@ -229,10 +229,10 @@ def h_table(
 
     #   Create the table from header and body
     table1 = table_f(header, body)
-    # table = '<div style="overflow-x:auto;">\n'
-    table = "<div>\n"
+    # table = '<div style="overflow-x:auto;">\n\n'
+    table = "<div>\n\n"
     table += table1
-    table += "</div>"
+    table += "\n</div>"
 
     if display_html:
         display(HTML(table))
