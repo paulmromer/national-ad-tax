@@ -99,8 +99,7 @@ def h_table(
 
     #   Font Size
     # table_style = "font-family: Menlo, Courier; "
-    
-    table_style = "font-size: " + str(font_size)
+    table_style = "font-size: " + str(font_size) + "px; "
 
     #   Borders
     border_style = border_thickness + " solid " + border_color
@@ -174,9 +173,9 @@ def h_table(
         h += '    <tr style="{0}">\n'.format("")
         h += '      <th style="{0}">\n'.format(header_bkgd)
         if len(table_title) > 0:
-            h += "        <pre style='margin: 5px; {0}'>{1}</pre>\n".format(title_f(), table_title)
+            h += "        <pre style='{0}'>{1}</pre>\n".format(title_f(), table_title)
         for j in range(0,header_rows):
-            h += "        <pre style='margin: 5px; {0}'>{1}</pre>\n".format(pre_style, next(row_gen))
+            h += "        <pre style='{0}'>{1}</pre>\n".format(pre_style, next(row_gen))
         h += "      </th>\n"
         h += "    </tr>\n"
         h += "  </thead>\n"
@@ -200,9 +199,10 @@ def h_table(
                 bkgd = stripe_bkgd
 
         pre_style = font_fam + "{0}".format(bkgd)
+
         h = "    <tr>\n"
         h += '      <td style="{0}">\n'.format(bkgd)
-        h += "        <pre style='margin: 5px; {0}>{1}</pre>\n".format(pre_style, b_row)
+        h += "        <pre style='{0}'>{1}</pre>\n".format(pre_style, b_row)
         h += "      </td>\n"
         h += "    </tr>\n"
         return h, row_num + 1
