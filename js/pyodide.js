@@ -6,12 +6,10 @@ async function loadPyodideAndPackages(){
     await self.pyodide.runPython("import numpy as np");
     await self.pyodide.runPython("import io, base64");
     document.getElementById("run").classList.remove("hidden");
-    let code = await readCode("./python/ad-tax.py");
-    let html_table = await readCode("./python/html-table.py")
+    let code = await readCode("./python/adTax.py");
+    let html_table = await readCode("./python/htmlTable.py")
     pyodide.runPython(html_table);
-    console.time('runcode');
     pyodide.runPython(code);
-    console.timeEnd('runcode');
 }
 
 loadPyodideAndPackages()
@@ -33,7 +31,6 @@ function executeCode() {
     pyodide.runPython("split_1 = split(1,b,r)");
     pyodide.runPython("split_2 = split(2,b,r)");
     pyodide.runPython("split_4 = split(4,b,r)");
-    console.log(pyodide.globals.get("split_1"))
     document.getElementById("split-1").innerHTML=pyodide.globals.get("split_1");
     document.getElementById("split-2").innerHTML=pyodide.globals.get("split_2");
     document.getElementById("split-4").innerHTML=pyodide.globals.get("split_4");

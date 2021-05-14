@@ -1,8 +1,11 @@
-# import numpy as np
-# import matplotlib.pyplot as plt
-# import matplotlib.ticker as ticker
-# from html-table import h_table 
-# from IPython.display import display, HTML
+
+if __name__ == "__main__":
+    import numpy as np
+    import matplotlib.pyplot as plt
+    import matplotlib.ticker as ticker
+    from IPython.display import display, HTML
+    import io, base64
+    from htmlTable import *
 
 def ar(x: float, b: list, r: list):
     """
