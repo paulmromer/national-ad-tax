@@ -44,15 +44,19 @@ a {
     margin-top: 0;
 }
 
-.mb-0 {
-    margin-bottom: 0;
-}
-
 .mt-2 {
     margin-top: 2rem;
 }
 .mt-5 {
     margin-top: 5rem;
+}
+
+.mb-0 {
+    margin-bottom: 0;
+}
+
+.mb-2 {
+    margin-bottom: 2rem;
 }
 
 .m-auto {
@@ -102,6 +106,7 @@ img {
 }
 
 .CodeMirror {
+    font-family: Menlo, "Deja Vu Sans Mono", "Roboto Mono", "Courier New", Courier, monospace;
     border-top: 1px solid;
     border-bottom: 1px solid;
     font-size: 12px;
@@ -158,6 +163,7 @@ h3 {
 }
 
 .error {
+    font-family: Menlo, "Deja Vu Sans Mono", "Roboto Mono", "Courier New", Courier, monospace;
     font-size: 0.75rem;
     color: red;
 }

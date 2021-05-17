@@ -27,10 +27,12 @@ function executeCode() {
         // run python code
         pyodide.runPython(input);
         pyodide.runPython("table_marg = table_marg_rates(b, r)");
-        pyodide.runPython("table_total = table_revenue_tax(b, r)");
-        document.getElementById("results").classList.remove("hidden")
         document.getElementById("marginal-rate-table-calculated").innerHTML=pyodide.globals.get("table_marg");
-        document.getElementById("rev-table-calculated").innerHTML=pyodide.globals.get("table_total");
+        document.getElementById("results").classList.remove("hidden")
+
+        pyodide.runPython("table_total = table_revenue_tax(b, r)");
+        document.getElementById("rev-tax-table-calculated").innerHTML=pyodide.globals.get("table_total");
+        
         pyodide.runPython("calculated_graph = us_fig(b,r)");
         document.getElementById("avg-tax-rate-calculated").src=pyodide.globals.get("calculated_graph");
         pyodide.runPython("split_1 = split(1,b,r)");
@@ -40,14 +42,15 @@ function executeCode() {
         document.getElementById("split-2").innerHTML=pyodide.globals.get("split_2");
         document.getElementById("split-4").innerHTML=pyodide.globals.get("split_4");
     } catch(err) {
-        showPythonError(err, "us_estimates_error");
+        message = '<div class="mb-2">Oops! There seems to be a problem with the code you submitted. Please take a look to see if there is a line number in the error message below. If so, try editing the line and click the run button again. For example, be sure that you have not added a space before either of the variables, b and r.</div>'
+        showPythonError(err, message, "us_estimates_error");
     }
 }
 
-function showPythonError(err , div_id){
+function showPythonError(err, message, div_id){
     el =  document.getElementById(div_id);
     el.classList.remove('hidden');
-    el.innerHTML = err.message;
+    el.innerHTML = message + err.message;
 }
 
 document.getElementById('run').addEventListener('click', function () {
