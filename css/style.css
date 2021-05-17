@@ -156,3 +156,8 @@ h3 {
     font-size: 1.6rem;
     font-weight: normal;
 }
+
+.error {
+    font-size: 0.75rem;
+    color: red;
+}
