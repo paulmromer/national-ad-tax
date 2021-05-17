@@ -1,21 +1,21 @@
 @font-face {
-    font-family: 'StixTwoMathRegular';
-    src: url('../fonts/stixtwomath-regular.woff2') format('woff2'),
-         url('../fonts/stixtwomath-regular.woff') format('woff');
+    font-family: 'etbookot';
+    src: url('../fonts/etbookot-roman-webfont.woff2') format('woff2'),
+         url('../fonts/etbookot-roman-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'StixTwoTextRegular';
-    src: url('../fonts/stixtwotext-regular.woff2') format('woff2'),
-         url('../fonts/stixtwotext-regular.woff') format('woff');
+    font-family: 'etbookot-italic';
+    src: url('../fonts/etbookot-italic-webfont.woff2') format('woff2'),
+         url('../fonts/etbookot-italic-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
 body {
-    font-family: 'StixTwoTextRegular', serif;
+    font-family: 'etbookot', serif;
     font-size: larger;
 }
 
@@ -148,12 +148,13 @@ footer {
 
 h1 {
     font-size: 2.6rem;
-    font-weight: bold;
+    font-weight: normal;
 }
 
 h2 {
+    font-family: "etbookot-italic";
     font-size: 1.6rem;
-    font-weight: bold;
+    font-weight: normal;
     font-style: italic;
 }
 
@@ -161,6 +162,12 @@ h3 {
     font-size: 1.6rem;
     font-weight: normal;
 }
+
+h4 {
+    font-weight: normal;
+}
+
+
 
 .error {
     font-family: Menlo, "Deja Vu Sans Mono", "Roboto Mono", "Courier New", Courier, monospace;
