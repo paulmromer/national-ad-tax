@@ -8,99 +8,158 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Ad-Tax</title>
     <link async defer rel="stylesheet" href="./css/style.css">
+    <!-- code mirror -->
     <link async defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.58.2/lib/codemirror.css">
     <script src="https://cdn.jsdelivr.net/npm/codemirror@5.58.2/lib/codemirror.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/codemirror@5.58.2/mode/python/python.js"></script>
-
+    <!-- pyodide -->
     <script src="https://cdn.jsdelivr.net/pyodide/v0.17.0/full/pyodide.js"></script>
 </head>
 
 <body>
-    <h1 class="text-center mt-5">Digital Ad Tax</h1>
 
-    <p>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi, rerum provident. Nihil aperiam cumque enim officia commodi sint quo. Qui, reprehenderit recusandae suscipit tempore cum a fuga officiis perspiciatis repellendus.
-    </p>
-
-    <div id="marginal-rate-table-default"></div>
-
-    <p>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi, rerum provident. Nihil aperiam cumque enim officia commodi sint quo. Qui, reprehenderit recusandae suscipit tempore cum a fuga officiis perspiciatis repellendus.
-    </p>
-
-    <div id="total-revenue-table-default"></div>
-
-    <p>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi, rerum provident. Nihil aperiam cumque enim officia commodi sint quo. Qui, reprehenderit recusandae suscipit tempore cum a fuga officiis perspiciatis repellendus.
-    </p>
-
-    <div class="text-center">
-        <img src="./graphs/fig-us-default.png" alt="Graph of average tax rates" />
-    </div>
-
-    <p>
-        Lorem ipsum, tax = <span class="inline-variable">XXXX</span>. 
-        Lorem ipsum, tax = <span class="inline-variable">XXXX</span>. 
-        Lorem ipsum, tax = <span class="inline-variable">XXXX</span>. 
-        dolor sit amet consectetur adipisicing elit. Animi, rerum provident. Nihil aperiam cumque enim officia commodi sint quo. Qui, reprehenderit recusandae suscipit tempore cum a fuga officiis perspiciatis repellendus.
-    </p>
-    
-    <p>
-        You can edit the brackets and marginal rates the tax in this code window.
-    </p>
-
-    <div class="editor mt-2">
-        <form>
-            <textarea id="code" name="code" rows=100></textarea>
-        </form>
-        <button class='btn hidden' id='run'>run</button>
+<div class="container d-flex mt-2">
+    <!-- navigation -->
+    <div class="nav d-mobile-none">
+        <div class="sticky">
+            <ul class="list-unstyled">
+                <li><a class="text-black" href="#us-estimates">US Estimates</a></li>
+                <li><a class="text-black" href="#customized-calculation">Customized Calculation</a></li>
+                <li><a class="text-black" href="#global-estimates">Global Estimates</a></li>
+                <li><a class="text-black" href="#code">Code</a></li>
+                <li><a class="text-black" href="https://paulromer.net/inquiries/">Inquiries</a></li>
+            </ul>
+        </div>
     </div>
     
-    <div id="results" class ="hidden mt-2">
+    <div class="content w-90 m-auto w-md-55">
+
+        <h1 class="mt-0 mb-0">Taxing Digital Advertising</h1>
+        <h3 class="mb-0 mt-0">Paul Romer</h3>
+        <!-- <h2 class="mb-0 mt-0">Paul Romer</h2> -->
+        <h5 class="mb-0 mt-0">May 17, 2021</h5>
 
         <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi, rerum provident. Nihil aperiam cumque enim officia commodi sint quo. Qui, reprehenderit recusandae suscipit tempore cum a fuga officiis perspiciatis repellendus.
+            If the citizens of the United States want to limit the harm from a business model for digital services that relies on spying and manipulation, they can tell their legislators to impose a progressive tax on revenue from digital advertizing. I described <a href="https://www.nytimes.com/2019/05/06/opinion/tax-facebook-google.html">elsewhere </a>the general reasons for having confidence in this approach. Here, I delve into specifics.
         </p>
 
-        <div id="marginal-rate-table-calculated"></div>
+        <h4><a name="us-estimates">The US Revenue Base</a></h4>
 
         <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi, rerum provident. Nihil aperiam cumque enim officia commodi sint quo. Qui, reprehenderit recusandae suscipit tempore cum a fuga officiis perspiciatis repellendus.
+            The key elements in a progressive tax are the tax base and the schedule of tax rates. One simple way to design a tax is to use as the base the revenue that a firm collects for displaying ads in the United States. This table illustrates a possible set of brackets and rates that could be applied to this base. 
         </p>
 
-        <div id="total-revenue-table-calculated"></div>
+        <div id="marginal-rate-table-default"></div>
 
         <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi, rerum provident. Nihil aperiam cumque enim officia commodi sint quo. Qui, reprehenderit recusandae suscipit tempore cum a fuga officiis perspiciatis repellendus.
+            With this scedule, a firm that recieves less than $5 billion in revenue per year would pay no tax. A firm that collects $8 billion per year would pay a 5% rate on the $3 billion in revenue that falls into the second bracket, hence $15 million. Its average tax rate is this amount divided by its revenue of $8 billion -- 0.19%.
+        </p>
+
+        <p>   
+            The line in this graph shows what you get if you repeat this calculation of the average tax rate for annual ad revenue between 0 and 60 billion. Using published estimates of US digital advertizing revenue for 2021, the graph uses dots and labels to show revenue and average tax rate for the four firms that would pay any tax under this particular schedule. The amount below the label for each firm shows how much it would owe (in billions of dollars).
         </p>
 
         <div class="text-center">
-            <img id="avg-tax-rate-calculated" src="./graphs/empty-graph.png" alt="Graph of average tax rates" />
+            <img src="./graphs/fig-us-default.png" alt="Graph of average tax rates" />
         </div>
 
         <p>
-            Lorem ipsum, tax = <span id="split-1" class="inline-variable"></span>. 
-            Lorem ipsum, tax = <span id="split-2" class="inline-variable"></span>. 
-            Lorem ipsum, tax = <span id="split-4" class="inline-variable"></span>. 
-            dolor sit amet consectetur adipisicing elit. Animi, rerum provident. Nihil aperiam cumque enim officia commodi sint quo. Qui, reprehenderit recusandae suscipit tempore cum a fuga officiis perspiciatis repellendus.
+            The next table shows that total revenue from digital ads has been growing very rapidly and is projected to continue to be rapid. If this tax schedule had been in place since 2018 and if revenue were unchanged, the third column shows that total tax reciepts for the government would grow even more rapidly. 
         </p>
 
+        <div id="total-revenue-table-default"></div>
+
+        <p>
+            These estimates of additional funds for the government are large. Over 10 years, they would finance a substantial portion of the $2 trillion in spending proposed under the administration's infrastructure plan. But if this tax were enacted, the funds collected by the government would soon start to fall. If they do, it will be a sign that this the tax is working as expected.
+        </p>
+        
+        <p>
+            Revenue from digital advertising would stop growing for two reasons. 
+            
+            This tax would Revenue Lorem ipsum, tax = <span class="inline-variable">XXXX</span>. 
+            Lorem ipsum, tax = <span class="inline-variable">XXXX</span>. 
+            Lorem ipsum, tax = <span class="inline-variable">XXXX</span>. 
+            dolor sit amet consectetur adipisicing elit. Animi, rerum provident. Nihil aperiam cumque enim officia commodi sint quo. Qui, reprehenderit recusandae suscipit tempore cum a fuga officiis perspiciatis repellendus.
+        </p>
+    
+        <p>
+            You can edit the brackets and marginal rates the tax in this code window.
+        </p>
+
+        <div class="editor mt-2">
+            <form>
+                <textarea id="code" name="code" rows=100></textarea>
+            </form>
+            <button class='btn hidden' id='run'>run</button>
+        </div>
+        <div id="us_estimates_error" class="hidden"></div>
+        <div id="results" class ="hidden mt-2">
+
+            <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi, rerum provident. Nihil aperiam cumque enim officia commodi sint quo. Qui, reprehenderit recusandae suscipit tempore cum a fuga officiis perspiciatis repellendus.
+            </p>
+
+            <div id="marginal-rate-table-calculated"></div>
+
+            <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi, rerum provident. Nihil aperiam cumque enim officia commodi sint quo. Qui, reprehenderit recusandae suscipit tempore cum a fuga officiis perspiciatis repellendus.
+            </p>
+
+            <div id="rev-tax-table-calculated"></div>
+
+            <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi, rerum provident. Nihil aperiam cumque enim officia commodi sint quo. Qui, reprehenderit recusandae suscipit tempore cum a fuga officiis perspiciatis repellendus.
+            </p>
+
+            <div class="text-center">
+                <img id="avg-tax-rate-calculated" src="./graphs/empty-graph.png" alt="Graph of average tax rates" />
+            </div>
+
+            <p>
+                Lorem ipsum, tax = <span id="split-1" class="inline-variable"></span>. 
+                Lorem ipsum, tax = <span id="split-2" class="inline-variable"></span>. 
+                Lorem ipsum, tax = <span id="split-4" class="inline-variable"></span>. 
+                dolor sit amet consectetur adipisicing elit. Animi, rerum provident. Nihil aperiam cumque enim officia commodi sint quo. Qui, reprehenderit recusandae suscipit tempore cum a fuga officiis perspiciatis repellendus.
+            </p>
+
+            <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi, rerum provident. Nihil aperiam cumque enim officia commodi sint quo. Qui, reprehenderit recusandae suscipit tempore cum a fuga officiis perspiciatis repellendus.
+            </p>
+
+            <!-- <a href="">
+                More detail about the code that is doing the calculations. 
+            </a>     -->
+
+        </div>
+
+        <h2 class="mt-5"><a name="customized-calculation">Customized Calculation</a></h2>
+        <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi, rerum provident. Nihil aperiam cumque enim officia commodi sint quo. Qui, reprehenderit recusandae suscipit tempore cum a fuga officiis perspiciatis repellendus.
+        </p>
         <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi, rerum provident. Nihil aperiam cumque enim officia commodi sint quo. Qui, reprehenderit recusandae suscipit tempore cum a fuga officiis perspiciatis repellendus.
         </p>
 
-        <!-- <a href="">
-            More detail about the code that is doing the calculations. 
-        </a>     -->
+        <h2 class="mt-5"><a name="global-estimates">Global Estimates</a></h2>
+        <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi, rerum provident. Nihil aperiam cumque enim officia commodi sint quo. Qui, reprehenderit recusandae suscipit tempore cum a fuga officiis perspiciatis repellendus.
+        </p>
+        <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi, rerum provident. Nihil aperiam cumque enim officia commodi sint quo. Qui, reprehenderit recusandae suscipit tempore cum a fuga officiis perspiciatis repellendus.
+        </p>
+
+        <h2 class="mt-5"><a name="code">Code</a></h2>
+        <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi, rerum provident. Nihil aperiam cumque enim officia commodi sint quo. Qui, reprehenderit recusandae suscipit tempore cum a fuga officiis perspiciatis repellendus.
+        </p>
+        <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi, rerum provident. Nihil aperiam cumque enim officia commodi sint quo. Qui, reprehenderit recusandae suscipit tempore cum a fuga officiis perspiciatis repellendus.
+        </p>
 
     </div>
-    
-    <p>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi, rerum provident. Nihil aperiam cumque enim officia commodi sint quo. Qui, reprehenderit recusandae suscipit tempore cum a fuga officiis perspiciatis repellendus.
-    </p>
+</div>
 
-    <footer>
-    </footer>
+    <footer> </footer>
 
     <script src="./js/editor.js"></script>
     <script src="./js/load-tables.js"></script>

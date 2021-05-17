@@ -5,6 +5,7 @@ async function loadPyodideAndPackages(){
     await self.pyodide.runPython("from matplotlib import ticker");
     await self.pyodide.runPython("import numpy as np");
     await self.pyodide.runPython("import io, base64");
+    await self.pyodide.runPython("from collections import namedtuple");
     document.getElementById("run").classList.remove("hidden");
     let code = await readCode("./python/adTax.py");
     let html_table = await readCode("./python/htmlTable.py")
@@ -22,10 +23,10 @@ function executeCode() {
     input = editor.getDoc().getValue();
     pyodide.runPython(input);
     pyodide.runPython("table_marg = table_marg_rates(b, r)");
-    pyodide.runPython("table_total = table_tax_paid_total(b, r)");
+    pyodide.runPython("table_rev_tax = table_revenue_tax(b, r)");
     document.getElementById("results").classList.remove("hidden")
     document.getElementById("marginal-rate-table-calculated").innerHTML=pyodide.globals.get("table_marg");
-    document.getElementById("total-revenue-table-calculated").innerHTML=pyodide.globals.get("table_total");
+    document.getElementById("rev-tax-table-calculated").innerHTML=pyodide.globals.get("table_rev_tax");
     pyodide.runPython("calculated_graph = us_fig(b,r)");
     document.getElementById("avg-tax-rate-calculated").src=pyodide.globals.get("calculated_graph");
     pyodide.runPython("split_1 = split(1,b,r)");
