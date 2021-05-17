@@ -1,8 +1,4 @@
-// get the browser
-const browser = get_browser().name.toLowerCase();  
-
 async function loadPyodideAndPackages(){
-
     // load pyodide
     await loadPyodide({ indexURL : 'https://cdn.jsdelivr.net/pyodide/v0.17.0/full/' });
    
@@ -11,7 +7,7 @@ async function loadPyodideAndPackages(){
     await self.pyodide.runPython("from collections import namedtuple");
  
     // load matplotlib if we are not on safari  
-    if (browser != 'safari') {
+    if ( detectSafariOrMobile() == false ) {
         await self.pyodide.loadPackage('matplotlib');
         await self.pyodide.runPython("import matplotlib.pyplot as plt")
         await self.pyodide.runPython("from matplotlib import ticker");
@@ -19,7 +15,7 @@ async function loadPyodideAndPackages(){
    
     // for safari, load numpy
     // numpy is indirectly loaded with matplotlib on other browsers
-    if (browser == 'safari' ) {
+    if (detectSafariOrMobile() == true ) {
         await self.pyodide.loadPackage('numpy');   
         // hide any graph elements on safari
         hideGraphElements();
@@ -33,7 +29,7 @@ async function loadPyodideAndPackages(){
     pyodide.runPython(html_table);
     pyodide.runPython(code);
 
-    if (browser != 'safari') {
+    if (detectSafariOrMobile() == false ) {
         let graphs = await readCode("./python/graphs.py");
         pyodide.runPython(graphs);
     }
@@ -62,7 +58,7 @@ function executeCode() {
         pyodide.runPython("table_total = table_revenue_tax(b, r)");
         document.getElementById("rev-tax-table-calculated").innerHTML=pyodide.globals.get("table_total");
         
-        if (browser != 'safari') {
+        if (detectSafariOrMobile() == false ) {
             pyodide.runPython("calculated_graph = us_fig(b,r)");
             document.getElementById("avg-tax-rate-calculated").src=pyodide.globals.get("calculated_graph");
         } 
@@ -92,7 +88,22 @@ document.getElementById('run').addEventListener('click', function () {
 
 function hideGraphElements() {
     document.getElementById('avg-tax-rate-calculated').remove();
-    document.getElementById('avg-tax-rate-calculated-container').innerHTML = '<div class="error">To see an additional graph created by matplotlib, please use Chrome, Firefox or Edge on a laptop.</div>'
+    document.getElementById('avg-tax-rate-calculated-container').innerHTML = '<div class="error">To see a new graph based on your changes to the tax brackets and rates, please come back to this page from a desktop machine using Chrome, Firefox or Edge.</div>'
+}
+
+function detectSafariOrMobile(){
+    // get the browser
+    const browser = get_browser().name.toLowerCase();  
+
+    if (browser == 'safari') {
+        return true;
+    }
+    
+    if (detectmob()) {
+        return true;
+    }
+
+    return false;
 }
 
 // detect mobile
