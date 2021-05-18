@@ -1,4 +1,14 @@
+function delay(n){
+    return new Promise(function(resolve){
+        setTimeout(resolve,n*1000);
+    });
+}
+
 async function loadPyodideAndPackages(){
+    // wait for time specified in delay 
+    console.log('waiting')
+    await delay(10)
+    console.log('done waiting')
     // load pyodide
     await loadPyodide({ indexURL : 'https://cdn.jsdelivr.net/pyodide/v0.17.0/full/' });
    
@@ -47,9 +57,11 @@ async function readCode(file) {
 function executeCode() {
     input = editor.getDoc().getValue();
     try {
-        // clear any error messages from previous runs (if any)
+        // clear placeholder and any error messages from previous runs 
         document.getElementById('us_estimates_error').classList.add('hidden');
+        document.getElementById('placeholder').classList.add('hidden');
         // run python code
+
         pyodide.runPython(input);
         pyodide.runPython("table_marg = table_marg_rates(b, r)");
         document.getElementById("marginal-rate-table-calculated").innerHTML=pyodide.globals.get("table_marg");
@@ -63,12 +75,15 @@ function executeCode() {
             document.getElementById("avg-tax-rate-calculated").src=pyodide.globals.get("calculated_graph");
         } 
 
-        pyodide.runPython("split_1 = split(1,b,r)");
-        pyodide.runPython("split_2 = split(2,b,r)");
-        pyodide.runPython("split_4 = split(4,b,r)");
-        document.getElementById("split-1").innerHTML=pyodide.globals.get("split_1");
-        document.getElementById("split-2").innerHTML=pyodide.globals.get("split_2");
-        document.getElementById("split-4").innerHTML=pyodide.globals.get("split_4");
+        pyodide.runPython("split_1 = split(60, 1, b, r)");
+        pyodide.runPython("split_2 = split(60, 2, b, r)");
+        pyodide.runPython("split_diff = split_1 - split_2");
+        pyodide.runPython("split_1_str = '$'+format(split_1, '3.1f')")
+        pyodide.runPython("split_2_str = '$'+format(split_2, '3.1f')")
+        pyodide.runPython("split_diff_str = '$'+format(split_diff, '3.1f')")
+        document.getElementById("split-1").innerHTML=pyodide.globals.get("split_1_str");
+        document.getElementById("split-2").innerHTML=pyodide.globals.get("split_2_str");
+        document.getElementById("split-diff").innerHTML=pyodide.globals.get("split_diff_str");
 
     } catch(err) {
         message = '<div class="mb-2">Oops! There seems to be a problem with the code you submitted. Please take a look to see if there is a line number in the error message below. If so, try editing the line and click the run button again. For example, be sure that you have not added a space before either of the variables, b and r.</div>'

@@ -8,26 +8,25 @@ let editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 
 editor.setSize("100%", "350px");
 
-let python_snippet = `# Default
+let python_snippet = `# These are the brackets and marginal rates used above.
+#
 #b = [0,    5,    10,   15,    20,   25,    30,   35,    40,   50,    60]
 #r = [0, 0.05, 0.125, 0.20, 0.275, 0.35, 0.425, 0.50, 0.575, 0.65, 0.725]
 #
-# The hash or pound sign at the beginning of a line denotes a comment. 
-# The code here is set to run the uncommented lines for Alt #1. 
-# For reference, the lines above specify the defaults used above for 
-# b (the brackets) and r (the marginal rates). 
+# The hash at the beginning of a line marks it as a comment. If you click 
+#     the Run button without making any changes, it will redo the calculations 
+#     using these two un-commented lines:
 # 
-# Alt 1: Set marginal rate to 40% for revenue above $30 billion:
-# 
-b = [0,    5,    10,   15,    20,   25,   30]
-r = [0, 0.05, 0.125, 0.20, 0.275, 0.35, 0.40]
-# 
-# Alt 2: Multiply all rates by a factor f. To run, uncomment lines 29-32. 
-# They run last and will overwrite values from Alt 1. 
+b = [0,    5,   10,   15,   20,   25]
+r = [0, 0.10, 0.20, 0.30, 0.40, 0.50] 
+#
+# Uncomment the last four lines and change f to scale the rates up or down.
 # 
 #f = 0.5
 #b = [0,    5,    10,   15,    20,   25,    30,   35,    40,   50,    60]
 #r = [0, 0.05, 0.125, 0.20, 0.275, 0.35, 0.425, 0.50, 0.575, 0.65, 0.725]
-#r = [ rate * f for rate in r]` 
+#r = [ min(rate * f, 1.0) for rate in r]
+
+# Or type in any other system of brackets and rates that you want to explore.` 
 
 editor.getDoc().setValue(python_snippet); 

@@ -1,38 +1,57 @@
-
-if __name__ == "__main__":
-    import numpy as np
-    import matplotlib.pyplot as plt
-    import matplotlib.ticker as ticker
-    from collections import namedtuple
-    from IPython.display import display, HTML
-    import io, base64
-    from htmlTable import *
-
-def ar(x: float, b: list, r: list):
+def ar(y, b, r):
     """
-    Calculate the average tax rate
+    Calculates the average tax rate for a firm. 
+
+    Inputs
+    -----------
+    y, digital advertising revenue for a firm 
+    b, a list of tax brackets
+    r, a corresponding list of tax rates 
+    
+    Output
+    -------
+    The average tax rate 
+    """
+    # ind is an index for elements in b
+    ind = {}
+    for m, l in enumerate(b):
+        ind[l] = m
+
+    #tbl means the tax due on revenue equal to the lower limit of a tax bracket. 
+    tbl = {}
+    for l in b:
+        if l == 0:
+            tbl[l] = 0
+        else:
+            tbl[l] = ( b[ind[l]] - b[ind[l]-1] ) * r[ind[l]-1] + tbl[b[ind[l]-1]]
+    
+    if y == 0:
+        a = 0 
+        
+    for j in range(len(b)-1):
+        if b[j] < y and y <= b[j+1]:
+            a = ( (y - b[j]) * r[j] + tbl[b[j]] ) / y
+    
+    if  b[-1] < y:
+        a = ( (y - b[-1]) * r[-1] + tbl[b[-1]] ) / y 
+    
+    return a
+
+def split(y, m, b, r):
+    """[summary]
 
     Parameters
     ----------
-    x, revenue 
-    b, list of tax brackets
-    r, corresponding list of tax rates 
-    
-    Returns
-    -------
-    average tax rate 
-    """
-    bl = b
-    bu = (b[1:] + [np.inf])
-    
-    tp_bl = [0] + [ (bu[j]-bl[j]) * r[j] for j in range(0,len(b)-1) ]
-    tp_cum = np.array(tp_bl).cumsum()
+    y:float -- revenue of the initial firm
+    m:int -- number of successor firms of equal size 
+    b:float -- brackets
+    r:float -- marginal rates 
 
-    a = 0
-    for j in range(len(b)):
-        if bl[j] < x and x <= bu[j]:
-            a = ( (x - bl[j]) * r[j] + tp_cum[j] ) / x
-    return a
+    Output
+    ------
+    float -- total tax owed by the m successor firms 
+    """
+    return ar(y/m, b, r) * y
 
 def us_firms():
     """
@@ -77,6 +96,7 @@ def us_firms():
 
 
 def table_marg_rates(b, r):
+    import numpy as np
     bl = b
     bu = (b[1:] + [np.inf])
 
@@ -105,23 +125,24 @@ def calc_avg_rates(rev, b, r):
 def table_revenue_tax(b, r):
     _, rev = us_firms()
     total_rev_by_year = rev.sum(0)
+    google_rev = rev[0]
+    google_tax = [ar(y, b, r)*y for y in google_rev]
+    facebook_rev = rev[1]
+    facebook_tax = [ar(y, b, r)*y for y in facebook_rev]
     avg_rate = calc_avg_rates(rev, b, r)
     tax_owed = (rev * avg_rate).sum(0)
     year = "Year"
-    tr = "Total Revenue   "
+    tr = "Industry"
     td = "Tax Due"
     b = "(billion)"
     # blank = ""
     row_list = []
-    row_list.append(f"{' ': ^2}{year: ^10}{tr: ^20}{td: ^10}{' ': ^3}")
-    row_list.append(f"{'': ^12}{b: ^20}{b: ^12}{' ': ^2}")
+    row_list.append(f"{' ': ^2}{year: ^10}{'Industry': ^26}{'Google': ^26}{'Facebook': ^26}{' ': ^3}")
+    row_list.append(f"{'': ^12}{'Revenue': ^13}{'Tax Owed': ^13}{'Revenue': ^13}{'Tax Owed': ^13}{'Revenue': ^13}{'Tax Owed': ^13}{' ': ^2}")
     
     for j in range(6): 
-        row_list.append(f"{' ': <5}{j+2018: <12d} {total_rev_by_year[j]: >6.1f} {tax_owed[j]: >14.1f}{' ': >6}")
-    
-    return h_table(row_list, header_rows = 2, font_size=12, row_margin = "4px", display_html = False, return_html = True)    
-
-
-def split(s, b, r, revenue = 50):
-    tax_bill = s * (ar(revenue/s, b, r)* revenue/s)
-    return f"${tax_bill: <2.1f} billion"
+        row_list.append(
+            f"{' ': <3}{2018+j: ^8d}{total_rev_by_year[j]: >10.1f}{tax_owed[j]: >12.1f}{google_rev[j]: >14.1f}{google_tax[j]: >12.1f}{facebook_rev[j]: >14.1f}{facebook_tax[j]: >12.1f}{' ': >8}"
+        )
+                 
+    return h_table(row_list, header_rows = 2, font_size=12, row_margin = "4px", display_html = False, return_html = True)  

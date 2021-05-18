@@ -1,8 +1,3 @@
-if __name__ == "__main__":
-    import numpy as np 
-    from IPython.display import display, HTML
-    # from typing import List
-
 def h_table(
     rows: list,
     has_header: bool = True,
