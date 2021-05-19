@@ -146,3 +146,59 @@ def table_revenue_tax(b, r):
         )
                  
     return h_table(row_list, header_rows = 2, font_size=12, row_margin = "4px", display_html = False, return_html = True)  
+
+def table_revenue(b, r):
+    _, rev = us_firms()
+    total_rev_by_year = rev.sum(0)
+    google_rev = rev[0]
+    google_tax = [ar(y, b, r)*y for y in google_rev]
+    facebook_rev = rev[1]
+    facebook_tax = [ar(y, b, r)*y for y in facebook_rev]
+    avg_rate = calc_avg_rates(rev, b, r)
+    tax_owed = (rev * avg_rate).sum(0)
+    year = "Year"
+    tr = "Industry"
+    td = "Tax Due"
+    b = "(billion)"
+    # blank = ""
+    row_list = []
+    row_list.append(f"{'Revenue (billions)': ^56}")
+    row_list.append(f"{year: ^10}{'Industry': ^15}{'Google': ^15}{'Facebook': ^15}{' ': ^}")
+
+    for j in range(6): 
+        row_list.append(
+            f"{' ': <1}{2018+j: ^8d}{total_rev_by_year[j]: >10.1f}{google_rev[j]: >15.1f}{facebook_rev[j]: >15.1f}{' ': >7}")
+
+    # for row in row_list:
+    #     print(len(row))
+    #     print(row)
+                 
+    return h_table(row_list, header_rows = 2, font_size=12, row_margin = "4px", display_html = False, return_html = True)  
+
+def table_tax(b, r):
+    _, rev = us_firms()
+    total_rev_by_year = rev.sum(0)
+    google_rev = rev[0]
+    google_tax = [ar(y, b, r)*y for y in google_rev]
+    facebook_rev = rev[1]
+    facebook_tax = [ar(y, b, r)*y for y in facebook_rev]
+    avg_rate = calc_avg_rates(rev, b, r)
+    tax_owed = (rev * avg_rate).sum(0)
+    year = "Year"
+    tr = "Industry"
+    td = "Tax Due"
+    b = "(billion)"
+    
+    row_list = []
+    row_list.append(f"{'Tax Owed (billions)': ^56}")
+    row_list.append(f"{year: ^10}{'Industry': ^15}{'Google': ^15}{'Facebook': ^15}{' ': ^}")
+    
+    for j in range(6): 
+        row_list.append(
+            f"{' ': <1}{2018+j: ^8d}{tax_owed[j]: >10.1f}{google_tax[j]: >15.1f}{facebook_tax[j]: >15.1f}{' ': >7}")
+ 
+    # for row in row_list:
+    #         print(len(row))
+    #         print(row)
+
+    return h_table(row_list, header_rows = 2, font_size=12, row_margin = "4px", display_html = False, return_html = True)  

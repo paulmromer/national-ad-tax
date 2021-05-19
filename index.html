@@ -123,11 +123,13 @@
         </p>
         <h2><a name="incentives">Incentives for Change</a></h2>
         <p>
-            The next table shows one measure of the incentive for change that this tax system would create. It shows revenue for the industry as a whole and for the two dominant players, along with the tax that the entire industry and these firms would have to pay under this tax system, taking as given the history of revenue and the projections through 2023. One useful way to interpret the growing tax obligations that these two firms would confront is to think of them as the inducement that the government offers them for switching entirely to a model in which people pay for the services they receive.
+            The next table shows the recent and projected trend for US revenue from digital advertising and for the entire industry and for Google and Facebook. The table that follows just after shows the tax that the entire industry and these two firms would have to pay under this tax system, taking as given the history of revenue and the projections through 2023. The right way to interpret these growing tax obligations is to think of them as the inducement that the government offers for switching to a model with no advertising that asks people to pay for the services they receive.
         </p>  
-        <div  class="lh-1" id="total-revenue-table-default"></div>
+        <div  class="lh-1" id="revenue-table-default"></div>
+
+        <div  class="lh-1" id="tax-table-default"></div>
         <p>
-            The other inducement requires a simple calculation. Consider a firm with US digital advertising revenue of $60 billion per year. Under the tax system that I have described so far, this firm would owe about $22 billion in tax. It could split itself into two firms, each with revenue of $30 billion; roughly speaking, this is what would happen if Facebook were to spin out Instagram as an independent company. The two smaller firms would each face a lower average tax rate, so the total tax bill would fall from $22 billion to $10 billion. 
+            It takes a calculation to reveal the inducement that this tax system offers a firm to split itself into independent companies. For simplicity, consider a firm with US digital advertising revenue of $60 billion per year. Under this tax system, this firm would owe roughly $22 billion in tax. It could split itself into two firms, each with revenue of $30 billion; roughly speaking, this is what would happen if Facebook were to spin out Instagram as a separate independent company. The two smaller firms would each face a lower average tax rate. The total tax bill for the two independent firms is $10 billion, which avoids $12 billion payments each year. 
         </p>
         <p>
             These two numbers capture the magnitude of the incentives that this tax system would create. A shift to a subscription model would save $22 billion per year in tax. Staying with the advertising model but splitting into two independent firms would save $12 billion per year.
@@ -139,7 +141,7 @@
             The other concern is that $22 billion per year would not be enough to get these firms to give up on the advertising model. Given the steps that Google is taking and the success that other firms have had with the subscription model, it seems plausible to me that $22 billion per year would be enough to trigger a switch. But if not, the backup incentive -- $12 billion per year for splitting a company in half -- comes into play. 
         </p>
         <p>
-            I can now explain the motivation for the high marginal rates. In the next section, you will have a chance to recalculate the results presented above for any tax system you want to consider. If you click the Run button below the window with the code without making any changes, you can try a tax schedule that the collects the same total revenue of about $22 billion per year from a firm with $60 billion in revenue and which caps the marginal tax rate at 50%. As you will see, the difference is that under this alternative, splitting the firm in two would save only $7.5 billion per year instead of the $12 billion in tax savings that the aggressive tax schedule would offer.  
+            I can now explain the reason for the high marginal rates. In the next section, you will have a chance to recalculate the results presented above for any tax system you want to consider. If you click the Run button below the window with the code without making any changes, you can try a tax schedule that the collects the same total revenue of roughly $22 billion per year from a firm with $60 billion in revenue and which caps the marginal tax rate at 50%. As you will see, the difference is that under this alternative, splitting the firm in two would save only $7.5 billion per year instead of the $12 billion in tax savings that the aggressive tax schedule would offer. So the system with the lower marginal rate creates the same incentive to switch away from a business model based on revenue from advertising, it offers a much smaller incentive for a firm that persists with this model to split itself in to smaller pieces.
         </p>
         <h2><a name="trying">Trying a Different Tax Schedule</a></h2>
         <p>
@@ -169,18 +171,19 @@
                 Under this tax system, a single firm with annual digital ad revenue of $60 billion faces a total tax bill of <span id="split-1" class="inline-variable"></span>. If it split itself into two firms each with annual revenue of $30 billion, their combined tax bill will be <span id="split-2" class="inline-variable"></span> billion, which implies a reduction in the total tax bill of <span id="split-diff" class="inline-variable"></span> billion. 
             </p>
             <p>
-                The next table repeats the calculation of the tax owed by the industry and by the two dominant firms. 
+                The next two tables repeat the summary of revenue and redo the calculation of the tax owed by the industry and by the two dominant firms. 
             </p>
-            <div  class="lh-1" id="rev-tax-table-calculated"></div>
+            <div  class="lh-1" id="rev-table-calculated"></div>
+            <div  class="lh-1" id="tax-table-calculated"></div>
             <p>
-                This graph displays the average tax rate for the tax schedule that you submitted. As in the previous graph, it locates the largest firms on this curve, and displays the total tax (in billions) that they would owe on their projected revenue for 2021.
+                As before, the graph displays the average tax rate for the tax schedule that you submitted. As in the previous graph, it locates the largest firms on this curve, and displays the total tax (in billions) that they would owe on their projected revenue for 2021.
             </p>
             <div id="avg-tax-rate-calculated-container" class="text-center">
                 <img id="avg-tax-rate-calculated" src="./graphs/empty-graph.png" alt="Graph of average tax rates" />
             </div>
         </div>
         <p id ="placeholder" class="mt-2">
-            If you do not see a Run button just below the code window, on the right, please be patient. It will appear once your browser has created its own Python environment. After it appears, when you click the button, the calculated results (in tables and inline in bold) will replace this placeholder text.
+            If you do not see a Run button on the right, just below the code window, please be patient. It will appear once your browser has created its own Python environment. After it appears, when you click the button, the calculated results (in tables and inline in bold) will replace this placeholder text.
         </p>
         <h2><a name="nextPost">The Next Post</a></h2>
             <p>

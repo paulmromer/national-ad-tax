@@ -67,8 +67,11 @@ function executeCode() {
         document.getElementById("marginal-rate-table-calculated").innerHTML=pyodide.globals.get("table_marg");
         document.getElementById("results").classList.remove("hidden")
 
-        pyodide.runPython("table_total = table_revenue_tax(b, r)");
-        document.getElementById("rev-tax-table-calculated").innerHTML=pyodide.globals.get("table_total");
+        pyodide.runPython("rev_table_calculated = table_revenue(b, r)");
+        document.getElementById("rev-table-calculated").innerHTML=pyodide.globals.get("rev_table_calculated");
+        
+        pyodide.runPython("tax_table_calculated = table_tax(b, r)");
+        document.getElementById("tax-table-calculated").innerHTML=pyodide.globals.get("tax_table_calculated");
         
         if (detectSafariOrMobile() == false ) {
             pyodide.runPython("calculated_graph = us_fig(b,r)");
