@@ -94,26 +94,28 @@ def us_firms():
         rev_firm_year[r] = np.array([firms_sorted[r][1]])
     return firms_sorted, rev_firm_year
 
-
 def table_marg_rates(b, r):
-    import numpy as np
     bl = b
     bu = (b[1:] + [np.inf])
 
     row_list = []
-    row_list.append(f" For Revenue Between " + " " * 5 + "Marginal Tax Rate" + " " * 2)
+    row_list.append(f" Revenue Between " + " " * 3 + "Marginal Rate" + " " * 0)
 
     for j in range(len(b)):
         l = b[j]
         u = bu[j]
         t = r[j]
         if u == np.inf:
-            row_list.append(" " * 6 + f"Above {l:>3} billion {t:>17.1%}" + " " * 8)
+            row_list.append(" " * 0 + f"Above{l:>3} billion {t:>12.1%}" + " " * 4)
         else:
-            row_list.append(" " * 5 + f" {l:>2} and {u:>2} billion {t:>17.1%}" + " " * 8)
+            row_list.append(" " * 0 + f" {l:>2} - {u:>2} billion {t:>12.1%}" + " " * 4)
+            
+    # for row in row_list:
+    #     print(len(row))
+    #     print(row)
 
     return h_table(row_list, font_size=12, row_margin = "4px", display_html = False, return_html = True)
-    
+        
 
 def calc_avg_rates(rev, b, r):
     avg_rate = np.zeros((13,6), dtype = float)
@@ -122,30 +124,6 @@ def calc_avg_rates(rev, b, r):
             avg_rate[row,col] = ar(float(rev[row,col]), b, r)
     return avg_rate
 
-def table_revenue_tax(b, r):
-    _, rev = us_firms()
-    total_rev_by_year = rev.sum(0)
-    google_rev = rev[0]
-    google_tax = [ar(y, b, r)*y for y in google_rev]
-    facebook_rev = rev[1]
-    facebook_tax = [ar(y, b, r)*y for y in facebook_rev]
-    avg_rate = calc_avg_rates(rev, b, r)
-    tax_owed = (rev * avg_rate).sum(0)
-    year = "Year"
-    tr = "Industry"
-    td = "Tax Due"
-    b = "(billion)"
-    # blank = ""
-    row_list = []
-    row_list.append(f"{' ': ^2}{year: ^10}{'Industry': ^26}{'Google': ^26}{'Facebook': ^26}{' ': ^3}")
-    row_list.append(f"{'': ^12}{'Revenue': ^13}{'Tax Owed': ^13}{'Revenue': ^13}{'Tax Owed': ^13}{'Revenue': ^13}{'Tax Owed': ^13}{' ': ^2}")
-    
-    for j in range(6): 
-        row_list.append(
-            f"{' ': <3}{2018+j: ^8d}{total_rev_by_year[j]: >10.1f}{tax_owed[j]: >12.1f}{google_rev[j]: >14.1f}{google_tax[j]: >12.1f}{facebook_rev[j]: >14.1f}{facebook_tax[j]: >12.1f}{' ': >8}"
-        )
-                 
-    return h_table(row_list, header_rows = 2, font_size=12, row_margin = "4px", display_html = False, return_html = True)  
 
 def table_revenue(b, r):
     _, rev = us_firms()
@@ -156,22 +134,19 @@ def table_revenue(b, r):
     facebook_tax = [ar(y, b, r)*y for y in facebook_rev]
     avg_rate = calc_avg_rates(rev, b, r)
     tax_owed = (rev * avg_rate).sum(0)
-    year = "Year"
-    tr = "Industry"
-    td = "Tax Due"
-    b = "(billion)"
-    # blank = ""
+
     row_list = []
-    row_list.append(f"{'Revenue (billions)': ^56}")
-    row_list.append(f"{year: ^10}{'Industry': ^15}{'Google': ^15}{'Facebook': ^15}{' ': ^}")
+
+    row_list.append(f"{'Revenue (billions)': ^30}")
+    row_list.append("Year  Industry Google Facebook")
 
     for j in range(6): 
         row_list.append(
-            f"{' ': <1}{2018+j: ^8d}{total_rev_by_year[j]: >10.1f}{google_rev[j]: >15.1f}{facebook_rev[j]: >15.1f}{' ': >7}")
+            f"{2018+j: ^4d}{total_rev_by_year[j]: >8.1f}{google_rev[j]: >8.1f}{facebook_rev[j]: >8.1f}{' '}")
 
-    # for row in row_list:
-    #     print(len(row))
-    #     print(row)
+#     for row in row_list:
+#         print(len(row))
+#         print(row)
                  
     return h_table(row_list, header_rows = 2, font_size=12, row_margin = "4px", display_html = False, return_html = True)  
 
@@ -184,21 +159,17 @@ def table_tax(b, r):
     facebook_tax = [ar(y, b, r)*y for y in facebook_rev]
     avg_rate = calc_avg_rates(rev, b, r)
     tax_owed = (rev * avg_rate).sum(0)
-    year = "Year"
-    tr = "Industry"
-    td = "Tax Due"
-    b = "(billion)"
     
     row_list = []
-    row_list.append(f"{'Tax Owed (billions)': ^56}")
-    row_list.append(f"{year: ^10}{'Industry': ^15}{'Google': ^15}{'Facebook': ^15}{' ': ^}")
+    row_list.append(f"{'Tax Owed (billions)': ^30}")
+    row_list.append("Year  Industry Google Facebook")
     
     for j in range(6): 
         row_list.append(
-            f"{' ': <1}{2018+j: ^8d}{tax_owed[j]: >10.1f}{google_tax[j]: >15.1f}{facebook_tax[j]: >15.1f}{' ': >7}")
- 
-    # for row in row_list:
-    #         print(len(row))
-    #         print(row)
+            f"{''}{2018+j: ^4d}{tax_owed[j]: >8.1f}{google_tax[j]: >8.1f}{facebook_tax[j]: >8.1f}{'  '}")
+
+#     for row in row_list:
+#         print(len(row))
+#         print(row)
 
     return h_table(row_list, header_rows = 2, font_size=12, row_margin = "4px", display_html = False, return_html = True)  
