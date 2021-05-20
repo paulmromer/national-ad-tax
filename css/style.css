@@ -187,6 +187,8 @@ ul.list-unstyled {
 
 footer {
     height: 50px;
+    color: gray;
+    font-size: 0.9rem;
 }
 
 @media (min-width: 720px) {
