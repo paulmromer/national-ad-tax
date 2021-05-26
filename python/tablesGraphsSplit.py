@@ -272,7 +272,7 @@ def floating_spines(ax, axis = 'l'):
     return ax
 
 
-def us_fig(b: list, r: list):
+def us_fig(b: list, r: list, savefile=False, fname="../graphs/fig-us-default.png"):
     """
     """
     firms, _ = us_firms()
@@ -323,7 +323,8 @@ def us_fig(b: list, r: list):
     fig.savefig(buf, format='png')
     buf.seek(0)
     img_str = 'data:image/png;base64,' + base64.b64encode(buf.read()).decode('UTF-8')
-    #fig.savefig("../graphs/fig-us-default.png")   
+    if savefile:
+        fig.savefig(fname)
     return img_str
 
 def ww_fig(b,r):

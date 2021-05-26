@@ -58,7 +58,7 @@
             Across the political spectrum, people are realizing that the digital advertising model pioneered by Google and Facebook poses a growing threat to democracy. These firms know more about citizens of the world's democracies than the Stasi knew about East Germans. They can exploit what they know without relying on the coercive power of a police state. They can adjust what people see and exercise control by a thousand nudges.
         </p>
         <p>
-            In the United States, Google receives 18% of all spending on digital political advertising; Facebook controls another 59%. (<span style="font-style: italic">Correction, May 22: Because of an editing error, earlier versions of this post omitted the word "digital" in the previous sentence, which meant that the assertions were false.</span>) In a public conversation in the summer of 2019, Mark Zuckerberg, the CEO and majority owner of Facebook, claimed that Facebook is the only candidate for the role of global arbiter for political discourse. It is the only organization that can work "in partnership with intelligence agencies and election commissions around the world" on "election integrity" because it has built "unprecedented content systems" that are "more sophisticated than what a lot of governments have." 
+            In the United States, recent estimates are that Facebook controls 59% of all spending on digital political advertising; Google controls another 18%. In a public conversation in the summer of 2019, Mark Zuckerberg, the CEO and majority owner of Facebook, claimed that Facebook is the only candidate for the role of global arbiter for political discourse. It is the only organization that can work "in partnership with intelligence agencies and election commissions around the world" on "election integrity" because it has built "unprecedented content systems" that are "more sophisticated than what a lot of governments have." 
             
 
         </p>
@@ -135,7 +135,7 @@
             The blue line in the graph below shows how the average tax rate varies with revenue. It starts at zero, then increases steadily for revenue above $5 billion per year. Using published estimates of US digital advertising revenue for this year, the graph also shows the location of the firms that receive the most revenue from digital advertising in the US. Twitter is one of the unlabeled dots with an average tax rate equal to zero. Microsoft is the first labeled dot. The horizontal coordinate of its dot reflects its revenue of $6.7 billion. Its vertical coordinate shows its average tax rate. The number next to its label shows the tax that it owes in billions of dollars. 
         </p>
         <div class="text-center">
-            <img src="./graphs/fig-us-default.png" alt="Graph of average tax rates" />
+            <img src="./graphs/us-fig-default.png" alt="Graph of average tax rates" />
         </div>
         <p>
             In this figure, the contrast between the large amount of tax that Google and Facebook would owe and the small amount that Microsoft and Amazon would owe highlights the effects of the choice of revenue from digital advertising as the base for the tax. Microsoft and Amazon collect far more revenue from other sources.
@@ -157,7 +157,7 @@
 
         <div  class="lh-1" id="tax-table-default"></div>
         <p>
-            It takes a calculation to reveal the inducement that this tax system offers a firm to split itself into independent companies. For simplicity, consider a firm with US digital advertising revenue of $60 billion per year. Under this tax system, this firm would owe roughly $22 billion in tax. It could split itself into two firms, each with revenue of $30 billion; roughly speaking, this is what would happen if Facebook were to spin out Instagram as a separate independent company. The two smaller firms would each face a lower average tax rate. The total tax bill for the two independent firms is $10 billion, which avoids $12 billion payments each year. 
+            It takes a calculation to reveal the inducement that this tax system offers a firm to split itself into independent companies. For simplicity, consider a firm with US digital advertising revenue of $60 billion per year. Under this tax system, this firm would owe roughly $22 billion in tax. It could split itself into two firms, each with half as much revenue; roughly speaking, this is what would happen if Facebook were to spin out Instagram as a separate independent company. The two smaller firms would each face a lower average tax rate. The total tax bill for the two independent firms is $10 billion, which avoids $12 billion payments each year. 
         </p>
         <p>
             These two numbers capture the magnitude of the incentives that this tax system would create. A shift to a subscription model would save $22 billion per year in tax. Staying with the advertising model but splitting into two independent firms would save $12 billion per year.
@@ -172,17 +172,24 @@
             I can now explain the reason for the high marginal rates. In the next section, you will have a chance to recalculate the results presented above for any tax system you want to consider. If you click the Run button below the window with the code without making any changes, you can try a tax schedule that collects the same total revenue of roughly $22 billion per year from a firm with $60 billion in revenue and which caps the marginal tax rate at 50%. As you will see, the difference is that under this alternative, splitting the firm in two would save only $7.5 billion per year instead of the $12 billion in tax savings that the aggressive tax schedule would offer. So the system with the lower marginal rate creates the same incentive to switch away from a business model based on revenue from advertising, it offers a much smaller incentive for a firm that persists with this model to split itself in to smaller pieces.
         </p>
         <h2><a name="trying">Trying a Different Tax Schedule</a></h2>
-        <p>
+        <div id="as-the-next-schedule" class="">
+            <p>
+                As the next schedule shows, it is possible to raise about the same revenue with a marginal rate that never exceeds 50%. The key difference is that the incentives for breaking up a firm are substantially lower. In this case, a split in half saves $7.5 billion per year instead of the $12 billion savings under the previous schedule.
+            </p>
+        </div>
+        <div id="editor-instructions" class="hidden">
+            <p>
             If you leave the text in the window as is and just click the Run button, the tax system you submit will be the one that is specified on lines 10 and 11, the lines that do not start with the comment symbol "#". It caps the marginal tax rate at 50% and makes up the lost revenue by reducing the size of its tax brackets. If you edit the text in the code window, you can submit a completely different set of brackets and rates and redo all the calculations.  
-        </p>
-        <p>
-            Before moving forward, please note these technical details: 
+            </p>
+            <p>
+                Before moving forward, please note these technical details: 
 
-            <ol>
-                <li>If you are on a mobile device or are using Safari as your browser, you will find newly calculated tables and inline values below the code window, browser limitations prevent the display of the corresponding graph. To see it, switch to a desktop computer that is running Firefox, Chrome or Edge.</li>
-                <li>If you haven't encountered Python before, be forewarned that one of the conventions that makes Python so readable is that it assigns meaning to white space that indents blocks of code. One potentially surprising consequence of this design choice is that an errant blank space at the beginning of a line of code can render it meaningless. So if you delete some hash markers to activate some of the sample lines of code, check to make sure that you have not inadvertently add an initial blank space. </li>
-            </ol>            
-        </p>
+                <ol>
+                    <li>If you are on a mobile device or are using Safari as your browser, you will find newly calculated tables and inline values below the code window, browser limitations prevent the display of the corresponding graph. To see it, switch to a desktop computer that is running Firefox, Chrome or Edge.</li>
+                    <li>If you haven't encountered Python before, be forewarned that one of the conventions that makes Python so readable is that it assigns meaning to white space that indents blocks of code. One potentially surprising consequence of this design choice is that an errant blank space at the beginning of a line of code can render it meaningless. So if you delete some hash markers to activate some of the sample lines of code, check to make sure that you have not inadvertently add an initial blank space. </li>
+                </ol>            
+            </p>
+            </div>
         <div id="editor-div" class="editor mt-2 hidden">
             <form>
                 <textarea id="code" name="code" rows=100></textarea>
@@ -191,12 +198,12 @@
         </div>
         <div id="us_estimates_error" class="hidden error mt-2"></div>
         <div id="results" class ="hidden mt-2">
-            <p>
+            <div id="you-clicked" class="hidden"><p>
                 This table shows the brackets and marginal rates that you submitted when you clicked the Run button: 
-            </p>
+            </p></div>
             <div  class="lh-1" id="marginal-rate-table-calculated"></div>
             <p>
-                Under this tax system, a single firm with annual digital ad revenue of $60 billion faces a total tax bill of <span id="split-1" class="inline-variable"></span>. If it split itself into two firms each with annual revenue of $30 billion, their combined tax bill will be <span id="split-2" class="inline-variable"></span> billion, which implies a reduction in the total tax bill of <span id="split-diff" class="inline-variable"></span> billion. 
+                Under this tax system, a single firm with annual digital ad revenue of $60 billion faces a total tax bill of <span id="split-1" class="inline-variable"></span>. If it split itself into two firms each with half as much revenue, their combined tax bill will be <span id="split-2" class="inline-variable"></span> billion, which implies a reduction in the total tax bill of <span id="split-diff" class="inline-variable"></span> billion. 
             </p>
             <p>
                 The next two tables repeat the summary of revenue and redo the calculation of the tax owed by the industry and by the two dominant firms. 
@@ -207,7 +214,7 @@
                 As before, the graph displays the average tax rate for the tax schedule that you submitted. As in the previous graph, it locates the largest firms on this curve, and displays the total tax (in billions) that they would owe on their projected revenue for 2021.
             </p>
             <div id="avg-tax-rate-calculated-container" class="text-center">
-                <img id="avg-tax-rate-calculated" src="./graphs/empty-graph.png" alt="Graph of average tax rates" />
+                <img id="avg-tax-rate-calculated" src="./graphs/us-fig-calculated.png" alt="Graph of average tax rates" />
             </div>
         </div>
         <p id ="placeholder" class="mt-2">
@@ -235,7 +242,8 @@
     <footer class="text-center">Python in the browser is made possible by Pyodide</footer>
 
     <script async defer data-domain="adtax.paulromer.net" src="https://plausible.io/js/plausible.js"></script>
-    <script src="./js/load-tables.js"></script>
+    <script src="./js/load-tables-1.js"></script>
+    <script src="./js/load-tables-2.js"></script>
     <script src="./js/main.js"></script>
 
 </body>

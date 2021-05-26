@@ -1,6 +1,18 @@
-if (!detectSafariOrMobile()){
-  const myWorker = new Worker("./js/worker.js");
 
+
+if (detectSafariOrMobile()) {
+  console.log("yes safari");
+  // document.getElementById("avg-tax-rate-calculated").src=wm.data[4]
+  document.getElementById("results").classList.remove("hidden");
+  document.getElementById("placeholder").classList.add("hidden");
+  document.getElementById("split-1").innerHTML="$22.5";
+  document.getElementById("split-2").innerHTML="$15.0";
+  document.getElementById("split-diff").innerHTML="$7.5";
+
+}
+else {
+  const myWorker = new Worker("./js/worker.js");
+  document.getElementById("as-the-next-schedule").classList.add("hidden");
   let editor = CodeMirror.fromTextArea(document.getElementById("code"), {
     lineNumbers: false,
     viewportMargin: Infinity,
@@ -38,10 +50,11 @@ r = [0, 0.10, 0.20, 0.30, 0.40, 0.50]
   console.log("initial_editor_text")
   myWorker.onmessage = function(wm) {
   if (wm.data[0] == "worker is ready") {
-    console.log("worker is ready msg received by main")
+    console.log("worker is ready msg received by main");
     document.getElementById("run").classList.remove("hidden");
+    document.getElementById("placeholder").classList.add("hidden");
     document.getElementById('run').addEventListener('click', function () {
-      let current_editor_text = editor.getDoc().getValue()
+      let current_editor_text = editor.getDoc().getValue();
       myWorker.postMessage(current_editor_text);
       console.log("run clicked first time");
     });
@@ -52,27 +65,30 @@ r = [0, 0.10, 0.20, 0.30, 0.40, 0.50]
       // clear placeholder and any error messages from previous runs 
       document.getElementById('us_estimates_error').classList.add('hidden');
       document.getElementById('placeholder').classList.add('hidden');
+      document.getElementById('editor-instructions').classList.remove('hidden');
+      document.getElementById("you-clicked").classList.remove('hidden');
+
       document.getElementById("marginal-rate-table-calculated").innerHTML= wm.data[1];
       
       document.getElementById("rev-table-calculated").innerHTML=wm.data[2];
       document.getElementById("tax-table-calculated").innerHTML=wm.data[3];
+      document.getElementById("avg-tax-rate-calculated").src=wm.data[4];
       
-      if (detectSafariOrMobile() == false ) {
-          document.getElementById("avg-tax-rate-calculated").src=wm.data[4];
-      } 
+      // if (detectSafariOrMobile() == false ) {
+      //     document.getElementById("avg-tax-rate-calculated").src=wm.data[4];
+      // } 
 
       document.getElementById("split-1").innerHTML=wm.data[5];
       document.getElementById("split-2").innerHTML=wm.data[6];
       document.getElementById("split-diff").innerHTML=wm.data[7];
-      document.getElementById("run").classList.remove("hidden")
-      document.getElementById("results").classList.remove("hidden")
+      document.getElementById("run").classList.remove("hidden");
+      document.getElementById("results").classList.remove("hidden");
 
       document.getElementById('run').addEventListener('click', function () {
         let current_editor_text = editor.getDoc().getValue()
         myWorker.postMessage(current_editor_text);
         console.log("run clicked subsequent times");
       });
-    
     }
     catch(err) {
       message = '<div class="mb-2">Oops! There seems to be a problem with the code you submitted. Please take a look to see if there is a line number in the error message below. If so, try editing the line and click the run button again. For example, be sure that you have not added a space before either of the variables, b and r.</div>'
@@ -151,3 +167,5 @@ function get_browser() {
     version: M[1]
   };
 }
+
+console.log("after defn of dectedSafariOrMobile");
