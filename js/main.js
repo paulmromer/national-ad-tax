@@ -1,15 +1,19 @@
-const myWorker = new Worker("./js/worker.js");
+if (!detectSafariOrMobile()){
+  const myWorker = new Worker("./js/worker.js");
 
-let editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-  lineNumbers: false,
-  viewportMargin: Infinity,
-  mode: 'python',
-  indentUnit: 4,
-});
+  let editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+    lineNumbers: false,
+    viewportMargin: Infinity,
+    mode: 'python',
+    indentUnit: 4,
+  });
 
-editor.setSize("100%", "350px");
+  document.getElementById("editor-div").classList.remove("hidden")
 
-let initial_editor_text = `# These are the brackets and marginal rates used above.
+  editor.setSize("100%", "350px");
+    
+    let initial_editor_text = `
+# These are the brackets and marginal rates used above.
 #
 #b = [0,    5,    10,   15,    20,   25,    30,   35,    40,   50,    60]
 #r = [0, 0.05, 0.125, 0.20, 0.275, 0.35, 0.425, 0.50, 0.575, 0.65, 0.725]
@@ -30,12 +34,18 @@ r = [0, 0.10, 0.20, 0.30, 0.40, 0.50]
 
 # Or type in any other system of brackets and rates that you want to explore.` 
 
-editor.getDoc().setValue(initial_editor_text); 
-
-myWorker.onmessage = function(wm) {
+  editor.getDoc().setValue(initial_editor_text); 
+  console.log("initial_editor_text")
+  myWorker.onmessage = function(wm) {
   if (wm.data[0] == "worker is ready") {
+    console.log("worker is ready msg received by main")
     document.getElementById("run").classList.remove("hidden");
-    console.log(wm.data[0]);
+    document.getElementById('run').addEventListener('click', function () {
+      let current_editor_text = editor.getDoc().getValue()
+      myWorker.postMessage(current_editor_text);
+      console.log("run clicked first time");
+    });
+    
   }
   else{
     try {
@@ -54,23 +64,34 @@ myWorker.onmessage = function(wm) {
       document.getElementById("split-1").innerHTML=wm.data[5];
       document.getElementById("split-2").innerHTML=wm.data[6];
       document.getElementById("split-diff").innerHTML=wm.data[7];
+      document.getElementById("run").classList.remove("hidden")
       document.getElementById("results").classList.remove("hidden")
 
-    } catch(err) {
-        message = '<div class="mb-2">Oops! There seems to be a problem with the code you submitted. Please take a look to see if there is a line number in the error message below. If so, try editing the line and click the run button again. For example, be sure that you have not added a space before either of the variables, b and r.</div>'
-        showPythonError(err, message, "us_estimates_error");
+      document.getElementById('run').addEventListener('click', function () {
+        let current_editor_text = editor.getDoc().getValue()
+        myWorker.postMessage(current_editor_text);
+        console.log("run clicked subsequent times");
+      });
+    
     }
-  }
-};
+    catch(err) {
+      message = '<div class="mb-2">Oops! There seems to be a problem with the code you submitted. Please take a look to see if there is a line number in the error message below. If so, try editing the line and click the run button again. For example, be sure that you have not added a space before either of the variables, b and r.</div>'
+      showPythonError(err, message, "us_estimates_error");
+    }
 
-myWorker.onmessageerror = function(error) {
-  console.log(error);
-};
+    }
+  } 
 
-document.getElementById('run').addEventListener('click', function () {
-  let current_editor_text = editor.getDoc().getValue()
-  myWorker.postMessage(current_editor_text);
-});
+  myWorker.onmessageerror = function(error) {
+    console.log(error);
+  };
+}
+
+
+// function hideGraphElements() {
+//   document.getElementById('avg-tax-rate-calculated').remove();
+//   document.getElementById('avg-tax-rate-calculated-container').innerHTML = '<div class="error">To see a new graph based on your changes to the tax brackets and rates, please come back to this page from a desktop machine using Chrome, Firefox or Edge.</div>'
+// }
 
 function showPythonError(err, message, div_id){
   el =  document.getElementById(div_id);
@@ -78,10 +99,6 @@ function showPythonError(err, message, div_id){
   el.innerHTML = message + err.message;
 }
 
-function hideGraphElements() {
-  document.getElementById('avg-tax-rate-calculated').remove();
-  document.getElementById('avg-tax-rate-calculated-container').innerHTML = '<div class="error">To see a new graph based on your changes to the tax brackets and rates, please come back to this page from a desktop machine using Chrome, Firefox or Edge.</div>'
-}
 
 function detectSafariOrMobile(){
   // get the browser

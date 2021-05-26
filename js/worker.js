@@ -1,3 +1,5 @@
+console.log("starting worker")
+
 loadImportRun()
 
 async function loadImportRun() {
