@@ -26,7 +26,7 @@ async function loadImportRun() {
     onmessage = async function(mm) {
         pyodide.runPython(mm.data); 
         console.log("Message received from main.js");
-        pyodide.runPython(await (await fetch('http://127.0.0.1:8000/python/tablesGraphsSplit.py')).text());
+        pyodide.runPython(await (await fetch('./python/tablesGraphsSplit.py')).text());
         console.log("tablesGraphsSplit.py fetched and executed")
         // pyodide.runPython(await (await fetch('http://127.0.0.1:8000/python/htmlTable.py')).text());
         // pyodide.runPython(await (await fetch('http://127.0.0.1:8000/python/graphs.py')).text());
