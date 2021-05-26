@@ -1,5 +1,0 @@
-to do
-    Fix the text that displays for safari and mobile
-    Should not be the text that shows before button click on C/FF
-    Might display prerendered versions of tables and graph, as in first part of the post.
-        If so, need to fix the nb so that it prerenders these too. 
