@@ -16,5 +16,5 @@ People who view the page using Chrome or Firefox on a desktop/laptop can provide
 
 Because it is a challenge to get the full machinery of Python running in the browser (especially the Matplotlib library for creating graphs), this page runs Pyodide in a web worker. This means that the main page does not freeze while Pyodide is creating a full Python environment with two workhorses from the data science stack (Numpy and Matplotlib) inside the browser.
 
-Pyodide does not yet work on mobile or Safari. People viewing the site using a mobile device or Safari on a desktop/laptop will see a static page that illustrates two possible tax schedules. 
+The Matplotlib library does not yet work under Pyodide on mobile or Safari, so people viewing the site using a mobile device or Safari on a desktop/laptop will see a static page that illustrates two possible tax schedules. 
 
