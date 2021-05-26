@@ -12,7 +12,7 @@ Reasonable people can differ. But the calculations provided here show that there
 
 
 # Under the hood
-People who view the page using Chrome or Firefox on a desktop/laptop can provide their own tax schedule. The page uses the [Pyodide](pyodide.org) library to run Python in the browser that will redraw the graph of the average tax rate and recalculate the two measures of the incentive for firms to make a change. 
+People who view the page using Chrome or Firefox on a desktop/laptop can provide their own tax schedule. The page uses the [Pyodide](https://pyodide.org) library to run Python in the browser that will redraw the graph of the average tax rate and recalculate the two measures of the incentive for firms to make a change. 
 
 Because it is a challenge to get the full machinery of Python running in the browser (especially the Matplotlib library for creating graphs), this page runs Pyodide in a web worker. This means that the main page does not freeze while Pyodide is creating a full Python environment with two workhorses from the data science stack (Numpy and Matplotlib) inside the browser.
 
