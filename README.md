@@ -1,4 +1,4 @@
-# Using a Tax on Digital Advertising to Work Toward a Less Dangerous Market for Digital Services
+# Taxing Digital Advertising
 
 This repository generates a page that is deployed on a subdomain of my personal website: adtax.paulromer.net. This page takes a specification of a progressive tax schedule that could be applied to digital advertising and calculates two numbers: 
 
