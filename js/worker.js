@@ -8,7 +8,7 @@ async function loadImportRun() {
     importScripts('/js/pyodide/pyodide.js');
     let pyodide = await loadPyodide({ indexURL : '/js/pyodide/' });
     await pyodide.loadPackage('matplotlib');
-    await sleep(5000);
+    await sleep(10000);
     
     await pyodide.runPython("import io, base64, os");
     await pyodide.runPython("os.environ['MPLBACKEND'] = 'AGG'");
