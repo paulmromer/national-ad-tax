@@ -7,9 +7,8 @@ const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
 async function loadImportRun() {
     importScripts('/js/pyodide/pyodide.js');
     let pyodide = await loadPyodide({ indexURL : '/js/pyodide/' });
-    
-    await sleep(5);
     await pyodide.loadPackage('matplotlib');
+    await sleep(5000);
     
     await pyodide.runPython("import io, base64, os");
     await pyodide.runPython("os.environ['MPLBACKEND'] = 'AGG'");
