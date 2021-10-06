@@ -1,6 +1,19 @@
 console.log("starting worker")
 
-loadImportRun()
+const myInit = {
+    mode: 'no-cors',
+    headers: {
+        'Accept': 'data'
+      },
+    cache: 'default'
+  };
+
+let myRequest = new Request('https://adtax.paulromer.net/js/pyodide/matplotlib.data');
+  
+fetch(myRequest, myInit)
+    .then(loadImportRun())
+
+// loadImportRun()
 
 const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
 
@@ -8,7 +21,7 @@ async function loadImportRun() {
     importScripts('/js/pyodide/pyodide.js');
     let pyodide = await loadPyodide({ indexURL : '/js/pyodide/' });
     await pyodide.loadPackage('matplotlib');
-    await sleep(10000);
+    await sleep(10);
     
     await pyodide.runPython("import io, base64, os");
     await pyodide.runPython("os.environ['MPLBACKEND'] = 'AGG'");
