@@ -1,17 +1,25 @@
 console.log("starting worker")
 
 const myInit = {
-    mode: 'no-cors',
+    mode: 'same-origin',
     headers: {
         'Accept': 'data'
       },
-    cache: 'default'
+    cache: 'reload'
   };
 
 let myRequest = new Request('https://adtax.paulromer.net/js/pyodide/matplotlib.data');
-  
-fetch(myRequest, myInit)
-    .then(loadImportRun())
+
+fetch(myRequest)
+.then(function(response) {
+  if (!response.ok) {
+    console.log("error");
+  }
+  return;
+}).then(loadImportRun())
+    
+// fetch(myRequest, myInit)
+//     .then(loadImportRun())
 
 // loadImportRun()
 
