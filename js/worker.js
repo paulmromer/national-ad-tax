@@ -10,11 +10,11 @@ const myInit = {
 
 let myRequest = new Request('https://adtax.paulromer.net/js/pyodide/matplotlib.data');
 
-fetch(myRequest)
+fetch(myRequest, myInit)
 .then(function(response) {
   if (!response.ok) {
     console.log("second fetch")
-    fetch(myRequest);
+    fetch(myRequest, myInit);
   }
   return;
 }).then(loadImportRun())
