@@ -2,19 +2,33 @@ console.log("starting worker")
 
 loadImportRun()
 
+const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
+
 async function loadImportRun() {
     importScripts('/js/pyodide/pyodide.js');
     let pyodide = await loadPyodide({ indexURL : '/js/pyodide/' });
-//    await runPyodideScript();
-//    await loadPyodideAsync();
+    
+    await sleep(5);
     await pyodide.loadPackage('matplotlib');
+    
     await pyodide.runPython("import io, base64, os");
     await pyodide.runPython("os.environ['MPLBACKEND'] = 'AGG'");
+    
+    await(5);
     await pyodide.runPython("import matplotlib");
+    
+    await sleep(5);
     await pyodide.runPython("import matplotlib.pyplot as plt");
+    
+    await sleep(5);
     await pyodide.runPython("import numpy as np");
+    
+    await sleep(5);
     await pyodide.runPython("from collections import namedtuple");
     await pyodide.runPython("from matplotlib import ticker");
+    
+    console.log("worker is ready")
+    
     postMessage(
         ["worker is ready", "", "", "", "","",""]
     )
@@ -61,12 +75,3 @@ async function loadImportRun() {
         };
     }
 }
-
-// async function runPyodideScript() {
-//     importScripts('https://cdn.jsdelivr.net/pyodide/v0.17.0/full/pyodide.js');
-// }
-
-// async function loadPyodideAsync() {
-//     await loadPyodide({ indexURL : 'https://cdn.jsdelivr.net/pyodide/v0.17.0/full/' });
-// }
-
