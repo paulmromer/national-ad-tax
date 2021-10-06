@@ -13,7 +13,8 @@ let myRequest = new Request('https://adtax.paulromer.net/js/pyodide/matplotlib.d
 fetch(myRequest)
 .then(function(response) {
   if (!response.ok) {
-    console.log("error");
+    console.log("second fetch")
+    fetch(myRequest);
   }
   return;
 }).then(loadImportRun())
